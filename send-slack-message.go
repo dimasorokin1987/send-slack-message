@@ -12,18 +12,21 @@ import(
 
 type page struct {}
 func (p page) ServeHTTP (w http.ResponseWriter, _ *http.Request){
-  //key := os.Getenv("SLACK_SECRET_KEY")
-  //url := 
+  token := os.Getenv("SLACK_SECRET_KEY")
+  url := "https://slack.com/api/chat.postMessage"
+
+  //curl -X POST "" -H "accept: application/json" -d token=BOT_ACCESS_TOKEN -d channel=U0G9QF3C6 -d text=Hello -d as_user=true
 
   requestBody, err := json.Marshal(map[string]string{
-   "name": "test",
-   "email": "tets@mail.com",
+   "token": token,
+   "channel": "#general",
+   "text": "test hello",
   })
   //resp, err := http.Get("http://httpbin.org/get")
-  resp, err := http.Post("http://httpbin.org/post",
-   "application/json",
-   bytes.NewBuffer(requestBody))
+  //resp, err := http.Post("http://httpbin.org/post","application/json",bytes.NewBuffer(requestBody))
+  resp, err := http.Post(url,"application/json",bytes.NewBuffer(requestBody))
   
+
   if err != nil {
     log.Fatalln(err)
   }
