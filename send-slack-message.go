@@ -12,7 +12,15 @@ import(
 )
 
 type page struct {}
-func (p page) ServeHTTP (w http.ResponseWriter, _ *http.Request){
+func (p page) ServeHTTP (w http.ResponseWriter, r *http.Request){
+  keys, ok := r.URL.Query()["txt"]
+  if !ok || len(keys[0]) < 1 {
+    log.Fatalln("Url Param 'txt' is missing")
+  }
+  txt := string(keys[0])
+  fmt.Fprint(w,string(txt))
+  return
+
   token := os.Getenv("SLACK_SECRET_KEY")
   url := "https://slack.com/api/chat.postMessage"
 
