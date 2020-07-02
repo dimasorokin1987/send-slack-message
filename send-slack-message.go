@@ -6,13 +6,24 @@ import(
   "log"
   "net/http"
   "fmt"
+  "bytes"
+  "encoding/json"
 )
 
 type page struct {}
 func (p page) ServeHTTP (w http.ResponseWriter, _ *http.Request){
   //key := os.Getenv("SLACK_SECRET_KEY")
   //url := 
-  resp, err := http.Get("http://httpbin.org/get")
+
+  requestBody, err := json.Marshall(map[string]string{
+   "name": "test",
+   "email": "tets@mail.com"
+  })
+  //resp, err := http.Get("http://httpbin.org/get")
+  resp, err := http.Post("http://httpbin.org/post",
+   "application/json",
+   bytes.NewBuffer(requestBody))
+  
   if err != nil {
     log.Fatalln(err)
   }
