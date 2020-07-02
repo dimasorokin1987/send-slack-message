@@ -27,7 +27,7 @@ func (p page) ServeHTTP (w http.ResponseWriter, r *http.Request){
   //curl -X POST "" -H "accept: application/json" -d token=BOT_ACCESS_TOKEN -d channel=U0G9QF3C6 -d text=Hello -d as_user=true
 
   requestBody, err := json.Marshal(map[string]string{
-   "token": token,
+  // "token": token,
    "channel": "#general",
    "text": txt,
   })
@@ -44,6 +44,8 @@ func (p page) ServeHTTP (w http.ResponseWriter, r *http.Request){
     log.Fatalln(err)
   }
   request.Header.Set("Content-Type","application/json;charset=utf-8")
+//Authorization: Bearer xoxp-xxxxxxxxx-xxxx 
+  request.Header.Set("Authorization","Bearer "+token)
 
   //resp, err := http.Get("http://httpbin.org/get")
   //resp, err := http.Post("http://httpbin.org/post","application/json",bytes.NewBuffer(requestBody))
