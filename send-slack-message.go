@@ -15,7 +15,7 @@ func (p page) ServeHTTP (w http.ResponseWriter, _ *http.Request){
   //key := os.Getenv("SLACK_SECRET_KEY")
   //url := 
 
-  requestBody, err := json.Marshall(map[string]string{
+  requestBody, err := json.Marshal(map[string]string{
    "name": "test",
    "email": "tets@mail.com",
   })
