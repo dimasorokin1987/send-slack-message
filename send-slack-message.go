@@ -18,8 +18,8 @@ func (p page) ServeHTTP (w http.ResponseWriter, r *http.Request){
     log.Fatalln("Url Param 'txt' is missing")
   }
   txt := string(keys[0])
-  fmt.Fprint(w,string(txt))
-  return
+  //fmt.Fprint(w,string(txt))
+  //return
 
   token := os.Getenv("SLACK_SECRET_KEY")
   url := "https://slack.com/api/chat.postMessage"
@@ -29,7 +29,7 @@ func (p page) ServeHTTP (w http.ResponseWriter, r *http.Request){
   requestBody, err := json.Marshal(map[string]string{
    "token": token,
    "channel": "#general",
-   "text": "test hello",
+   "text": txt,
   })
   if err != nil {
     log.Fatalln(err)
