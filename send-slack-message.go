@@ -17,7 +17,7 @@ func (p page) ServeHTTP (w http.ResponseWriter, _ *http.Request){
 
   requestBody, err := json.Marshall(map[string]string{
    "name": "test",
-   "email": "tets@mail.com"
+   "email": "tets@mail.com",
   })
   //resp, err := http.Get("http://httpbin.org/get")
   resp, err := http.Post("http://httpbin.org/post",
