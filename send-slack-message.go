@@ -44,6 +44,7 @@ func (p page) ServeHTTP (w http.ResponseWriter, r *http.Request){
     log.Fatalln(err)
   }
   request.Header.Set("Content-Type","application/json;charset=utf-8")
+  request.Header.Set("Access-Control-Allow-Origin", "*")
 //Authorization: Bearer xoxp-xxxxxxxxx-xxxx 
   request.Header.Set("Authorization","Bearer "+token)
 
