@@ -44,7 +44,7 @@ func (p page) ServeHTTP (w http.ResponseWriter, r *http.Request){
     log.Fatalln(err)
   }
   request.Header.Set("Content-Type","application/json;charset=utf-8")
-  request.Header.Set("Access-Control-Allow-Origin", "https://dimasorokin1987.github.io")
+  //request.Header.Set("Access-Control-Allow-Origin", "https://dimasorokin1987.github.io")
 //Authorization: Bearer xoxp-xxxxxxxxx-xxxx 
   request.Header.Set("Authorization","Bearer "+token)
 
@@ -63,6 +63,7 @@ func (p page) ServeHTTP (w http.ResponseWriter, r *http.Request){
     log.Fatalln(err)
   }
   //log.Println(string(body))
+  w.Header().Set("Access-Control-Allow-Origin", "*")
   fmt.Fprint(w,string(body))
 }
 
