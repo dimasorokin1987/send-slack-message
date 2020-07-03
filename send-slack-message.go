@@ -14,13 +14,13 @@ import(
 type page struct {}
 func (p page) ServeHTTP (w http.ResponseWriter, r *http.Request){
   if origin := req.Header.Get("Origin"); origin != "" {
-    r.Header().Set("Access-Control-Allow-Origin", "https://dimasorokin1987.github.io")
-    r.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-    r.Header().Set("Access-Control-Allow-Headers",
+    w.Header().Set("Access-Control-Allow-Origin", "https://dimasorokin1987.github.io")
+    w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+    w.Header().Set("Access-Control-Allow-Headers",
         "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
   }
   // Stop here if its Preflighted OPTIONS request
-  if req.Method == "OPTIONS" {
+  if r.Method == "OPTIONS" {
     return
   }
   
